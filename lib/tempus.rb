@@ -1,26 +1,62 @@
 class Tempus
-	# global for today
-	NOW = Time.now
+	attr_reader :now
+	@@now = Time.now
 
 	# e.g. "yyyy-mm-dd" for current day
 	def self.today
-		day   = Helpers.adjust_single_digits(NOW.day)
-		month = Helpers.adjust_single_digits(NOW.month)
-		year  = Helpers.adjust_single_digits(NOW.year)
-		return "#{year}-#{month}-#{day}"
+		"#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month)}-#{Helpers.adjust_single_digits(@@now.day)}"
 	end
 
-	# alias .today
 	def self.this_day
-		Tempus.today
+		Helpers.adjust_single_digits(@@now.day)
+	end
+
+	def self.tomorrow
+		# TODO
+	end
+
+	def self.next_day
+		Tempus.tomorrow
+	end
+
+	def self.yesterday
+		# TODO
+	end
+
+	def self.previous_day
+		Tempus.yesterday
 	end
 
 	def self.this_month
-		"#{NOW.month}"
+		"#{@@now.month}"
 	end
 
 	def self.this_month_word
-		Helpers.months_in_words(NOW.month)
+		Helpers.months_in_words(@@now.month)
+	end
+
+	def self.last_month
+		@@now.month <= 1 ? "#{@@now.year-1}-12-01" : "#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month-1)}-01"
+	end
+
+	def self.last_month_word
+		@@now.month <= 1 ? Helpers.months_in_words(12) : Helpers.months_in_words(@@now.month-1)
+	end
+
+	def self.next_month
+		@@now.month >= 12 ? "#{@@now.year+1}-01-01" : "#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month+1)}-01"
+	end
+
+	def self.last_year
+		"#{@@now.year-1}"
+	end
+
+	def self.this_year
+		"#{@@now.year}"
+	end
+
+	def self.next_year
+		"#{@@now.year+1}"
 	end
 end
 
@@ -42,8 +78,42 @@ class Helpers
 			11 => "November",
 			12 => "December"
 		}
-
 		months[month_number]
+	end
+
+	# gives the number of days in each month
+	def self.number_of_days_in_month(month_name, year)
+		months = {
+			"January" => 31,
+			"February" => 28,
+			"March" => 31,
+			"April" => 30,
+			"May" => 31,
+			"June" => 30,
+			"July" => 31,
+			"August" => 31,
+			"September" => 30,
+			"October" => 31,
+			"November" => 30,
+			"December" => 31
+		}
+
+		if leap_year(year)
+			months["February"] = 29
+		end
+	end
+
+	# returns true if leap year
+	def self.leap_year(year)
+		if year % 4 != 0
+			false
+		elsif year % 400 == 0
+			true
+		elsif year % 100 == 0
+			false
+		else
+			true
+		end
 	end
 
 	# takes a single digit numbers puts a 0 in front
