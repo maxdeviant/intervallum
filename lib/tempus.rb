@@ -80,6 +80,8 @@ class Tempus
 	end
 end
 
+private
+
 class Helpers
 	# takes a number and returns its month
 	def self.months_in_words(month_number)
