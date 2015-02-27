@@ -13,7 +13,6 @@ class Tempus
 
 	def self.tomorrow
 		days_in_month = Helpers.number_of_days_in_month(Helpers.months_in_words(@@now.month), @@now.year)
-
 		# if last day of the month, return the first of the next month
 		if @@now.day + 1 > days_in_month
 			return "#{@@now.year}-#{@@now.month+1}-01"
@@ -31,7 +30,17 @@ class Tempus
 	end
 
 	def self.yesterday
-		# TODO
+		last_day_of_previous_month = Helpers.number_of_days_in_month(Helpers.months_in_words(@@now.month-1), @@now.year)
+		# if 1st day of the month, return last day of previous
+		if @@now.day - 1 <= 0
+			return "#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month-1)}-#{last_day_of_previous_month}"
+		# if 1st day of the year, return December 31st of last year
+		elsif @@now.day - 1 <= 0 && @@now.month == 1
+			return "#{@@now.year-1}-31-01"
+		# just return the day before otherwise
+		else
+			return "#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month)}-#{Helpers.adjust_single_digits(@@now.day-1)}"
+		end
 	end
 
 	def self.previous_day
