@@ -12,7 +12,18 @@ class Tempus
 	end
 
 	def self.tomorrow
-		# TODO
+		days_in_month = Helpers.number_of_days_in_month(Helpers.months_in_words(@@now.month), @@now.year)
+
+		# if last day of the month, return the first of the next month
+		if @@now.day + 1 > days_in_month
+			return "#{@@now.year}-#{@@now.month+1}-01"
+		# if December 31st, head over to next year
+		elsif @@now.month == 12 && @@now.day + 1 > days_in_month
+			return "#{@@now.year+1}-01-01"
+		# return the next day
+		else
+			return "#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month)}-#{Helpers.adjust_single_digits(@@now.day+1)}"
+		end
 	end
 
 	def self.next_day
@@ -62,7 +73,6 @@ end
 
 class Helpers
 	# takes a number and returns its month
-	# returns nil if not included
 	def self.months_in_words(month_number)
 		months = {
 			1 => "January",
@@ -97,10 +107,7 @@ class Helpers
 			"November" => 30,
 			"December" => 31
 		}
-
-		if leap_year(year)
-			months["February"] = 29
-		end
+		leap_year(year) && month_name == "February" ? 29 : months[month_name]
 	end
 
 	# returns true if leap year
