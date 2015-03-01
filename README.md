@@ -1,2 +1,2 @@
-# tempus
+# intervallum
 a gem for timeframes
