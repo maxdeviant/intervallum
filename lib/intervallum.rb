@@ -1,14 +1,38 @@
-class Tempus
+=begin
+
+List of methods and examples as if today was March 2 2015
+
+today                        # "2015-03-02"
+this_day                     # "02"
+wordy_day                    # "March 2, 2015"
+tomorrow                     # "2015-03-03", alias: next_day
+yesterday                    # "2015-03-01", alias: previous_day
+this_month                   # "3"
+last_month                   # "2015-02-01", alias: previous_month
+next_month                   # "2015-04-01"
+wordy_month(arg)             # "March"     , note: 'arg' can be string or integer
+last_year                    # "2014"      , alias: previous_year
+this_year                    # "2015"
+next_year                    # "2016"
+in_months(4)                 # "2015-07-01"
+in_months(-2)                # "2015-01-01"
+
+=end
+
+class Intervallum
 	attr_reader :now
 	@@now = Time.now
 
-	# e.g. "yyyy-mm-dd" for current day
 	def self.today
 		"#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month)}-#{Helpers.adjust_single_digits(@@now.day)}"
 	end
 
 	def self.this_day
 		Helpers.adjust_single_digits(@@now.day)
+	end
+
+	def self.wordy_day
+		"#{Intervallum.wordy_month(Intervallum.this_month)} #{@@now.day}, #{@@now.year}"
 	end
 
 	def self.tomorrow
@@ -26,9 +50,10 @@ class Tempus
 	end
 
 	def self.next_day
-		Tempus.tomorrow
+		Intervallum.tomorrow
 	end
 
+	# returns previous day's date
 	def self.yesterday
 		last_day_of_previous_month = Helpers.number_of_days_in_month(Helpers.months_in_words(@@now.month-1), @@now.year)
 		# if 1st day of the month, return last day of previous
@@ -44,23 +69,23 @@ class Tempus
 	end
 
 	def self.previous_day
-		Tempus.yesterday
+		Intervallum.yesterday
 	end
 
 	def self.this_month
 		"#{@@now.month}"
 	end
 
-	def self.this_month_word
-		Helpers.months_in_words(@@now.month)
+	def self.wordy_month(month_as_string_or_integer)
+		Helpers.months_in_words(month_as_string_or_integer.to_i)
 	end
 
 	def self.last_month
 		@@now.month <= 1 ? "#{@@now.year-1}-12-01" : "#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month-1)}-01"
 	end
 
-	def self.last_month_word
-		@@now.month <= 1 ? Helpers.months_in_words(12) : Helpers.months_in_words(@@now.month-1)
+	def self.previous_month
+		Intervallum.last_month
 	end
 
 	def self.next_month
@@ -71,12 +96,36 @@ class Tempus
 		"#{@@now.year-1}"
 	end
 
+	def self.previous_year
+		Intervallum.last_year
+	end
+
 	def self.this_year
 		"#{@@now.year}"
 	end
 
 	def self.next_year
 		"#{@@now.year+1}"
+	end
+
+	# returns the first day of the month, after a +/- month is specified
+	def self.in_months(number)
+		# go into next year
+		if @@now.month + number > 12
+			"#{@@now.year+1}-#{Helpers.adjust_single_digits((@@now.month+number)%12)}-01"
+		# go into last year
+		elsif @@now.month + number < 1 && (@@now.month+number) % 12 != 0
+			"#{@@now.year-1}-#{Helpers.adjust_single_digits((@@now.month+number)%12)}-01"
+		# if land on December of this year
+		elsif (@@now.month + number) % 12 == 0 && number > 0
+			"#{@@now.year}-12-01"
+		# if land on December of last year
+		elsif (@@now.month + number) % 12 == 0 && number < 0
+			"#{@@now.year-1}-12-01"
+		# we stayed in the same year
+		else
+			"#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month+number)}-01"
+		end
 	end
 end
 
@@ -136,10 +185,6 @@ class Helpers
 
 	# takes a single digit numbers puts a 0 in front
 	def self.adjust_single_digits(number)
-		if number < 10
-			return "0#{number}"
-		else
-			return "#{number}"
-		end
+		number < 10 ? "0#{number}" : "#{number}"
 	end
 end
