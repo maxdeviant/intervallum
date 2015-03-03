@@ -8,6 +8,7 @@ wordy_day                    # "March 2, 2015"
 tomorrow                     # "2015-03-03", alias: next_day
 yesterday                    # "2015-03-01", alias: previous_day
 this_month                   # "3"
+first_of_the_month           # "2015-03-01"
 last_month                   # "2015-02-01", alias: previous_month
 next_month                   # "2015-04-01"
 wordy_month(arg)             # "March"     , note: 'arg' can be string or integer
@@ -70,6 +71,10 @@ class Intervallum
 
 	def self.previous_day
 		Intervallum.yesterday
+	end
+
+	def self.first_of_the_month
+		"#{@@now.year}-#{Helpers.adjust_single_digits(@now.month)}-01"
 	end
 
 	def self.this_month
