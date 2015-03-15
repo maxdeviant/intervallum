@@ -1,5 +1,6 @@
 # need to re-write some methods due to
 # 'now' being set to the current day
+# using methods where possible
 
 require 'spec_helper'
 
@@ -33,7 +34,6 @@ describe 'testing methods...' do
     end
   end
 
-  # out of order... need to test this before wordy_day
   context '#wordy_month' do
     it 'returns the month, in words' do
       # expect(Intervallum.wordy_month(1)).to eq('January')
@@ -41,9 +41,16 @@ describe 'testing methods...' do
     end
   end
 
+  context '#this_month' do
+    it 'returns the number of the month, as a string' do
+      expect("#{@time.month}").to eq('3')
+    end
+  end
+
   context '#wordy_day' do
-    xit 'returns the day, in words' do
-      # expect("")
+    it 'returns the day, in words' do
+      months = { 3 => 'March' }
+      expect("#{months[@time.month]} #{@time.day}, #{@time.year}").to eq('March 14, 2015')
     end
   end
 
