@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'testing helpers...' do
 	context '#months_in_words' do
 	  it 'returns a month, in words, when an input number is given' do
-      # expect(Helpers.months_in_words(1).to eq("January"))
+      expect(Helpers.months_in_words(1)).to eq('January')
     end
   end
 

@@ -23,7 +23,28 @@ describe 'testing methods...' do
   end
 
   context '#this_day' do
-      # day = Helpers.adjust_single_digits(@time.day)
-      # expect(day).
+    it 'returns the day as a number of the month' do
+      day = Helpers.adjust_single_digits(@time.day)
+      expect(day).to eq('14')
+    end
+
+    it 'returns the day with a leading zero if less than 10' do
+      expect(Helpers.adjust_single_digits(3)).to eq('03')
+    end
   end
-end
+
+  # out of order... need to test this before wordy_day
+  context '#wordy_month' do
+    it 'returns the month, in words' do
+      # expect(Intervallum.wordy_month(1)).to eq('January')
+      expect(Intervallum.wordy_month(7)).to eq('July') 
+    end
+  end
+
+  context '#wordy_day' do
+    xit 'returns the day, in words' do
+      # expect("")
+    end
+  end
+
+end # describe
