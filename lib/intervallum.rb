@@ -2,16 +2,16 @@
 
 List of methods and examples as if today was March 2 2015
 
-today                        # "2015-03-02"
-this_day                     # "02"
-wordy_day                    # "March 2, 2015"
+- today                        # "2015-03-02"
+- this_day                     # "02"
+- wordy_day                    # "March 2, 2015"
 tomorrow                     # "2015-03-03", alias: next_day
 yesterday                    # "2015-03-01", alias: previous_day
-this_month                   # "3"
+- this_month                   # "3"
 first_of_the_month           # "2015-03-01"
 last_month                   # "2015-02-01", alias: previous_month
 next_month                   # "2015-04-01"
-wordy_month(arg)             # "March"     , note: 'arg' can be string or integer
+- wordy_month(3)             # "March"     , note:  argument can be string or integer
 last_year                    # "2014"      , alias: previous_year
 this_year                    # "2015"
 next_year                    # "2016"
@@ -19,6 +19,8 @@ in_months(4)                 # "2015-07-01"
 in_months(-2)                # "2015-01-01"
 
 =end
+
+require_relative '../lib/helpers'
 
 class Intervallum
 	attr_reader :now
@@ -131,65 +133,5 @@ class Intervallum
 		else
 			"#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month+number)}-01"
 		end
-	end
-end
-
-private
-
-class Helpers
-	# takes a number and returns its month
-	def self.months_in_words(month_number)
-		months = {
-			1 => "January",
-			2 => "February",
-			3 => "March",
-			4 => "April",
-			5 => "May",
-			6 => "June",
-			7 => "July",
-			8 => "August",
-			9 => "September",
-			10 => "October",
-			11 => "November",
-			12 => "December"
-		}
-		months[month_number]
-	end
-
-	# gives the number of days in each month
-	def self.number_of_days_in_month(month_name, year)
-		months = {
-			"January" => 31,
-			"February" => 28,
-			"March" => 31,
-			"April" => 30,
-			"May" => 31,
-			"June" => 30,
-			"July" => 31,
-			"August" => 31,
-			"September" => 30,
-			"October" => 31,
-			"November" => 30,
-			"December" => 31
-		}
-		leap_year(year) && month_name == "February" ? 29 : months[month_name]
-	end
-
-	# returns true if leap year
-	def self.leap_year(year)
-		if year % 4 != 0
-			false
-		elsif year % 400 == 0
-			true
-		elsif year % 100 == 0
-			false
-		else
-			true
-		end
-	end
-
-	# takes a single digit numbers puts a 0 in front
-	def self.adjust_single_digits(number)
-		number < 10 ? "0#{number}" : "#{number}"
 	end
 end
