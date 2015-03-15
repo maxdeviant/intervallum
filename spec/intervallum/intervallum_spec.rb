@@ -70,6 +70,51 @@ describe 'testing methods...' do
     end
   end
 
+  context '#yesterday' do
+    it 'returns the previous day in a Gregorian format' do
+      expect("#{@time.year}-#{Helpers.adjust_single_digits(@time.month)}-#{@time.day-1}").to eq('2015-03-13')
+    end
+
+    it 'returns the last day of the previous month if currently the first of the month' do
+      last_day_in_march = 31
+      time = Time.parse('2015-04-01')
+      expect("#{time.year}-#{Helpers.adjust_single_digits(time.month-1)}-#{last_day_in_march}").to eq('2015-03-31')
+    end
+
+    it 'returns December 31st of previous year if January 1st' do
+      time = Time.parse('2015-01-01')
+      expect("#{@time.year-1}-12-31"). to eq('2014-12-31')
+    end
+  end
+
+  context '#first_of_the_month' do
+    it 'returns the first day of the respective month' do
+      expect("#{@time.year}-#{Helpers.adjust_single_digits(@time.month)}-01").to eq('2015-03-01')
+    end
+  end
+
+  context '#this_month' do
+    it "returns the current month's number, as a string" do
+      expect(Intervallum.this_month).to be_a_kind_of(String)
+    end
+  end
+
+  context '#last_month' do
+    it 'returns the first day of the previous month' do
+      expect("#{@time.year}-#{Helpers.adjust_single_digits(@time.month-1)}-01").to eq('2015-02-01')
+    end
+
+    it 'returns December 1st of previous year if January' do
+      time = Time.parse('2015-01-01')
+      expect("#{time.year-1}-12-01").to eq('2014-12-01')
+    end
+  end
+
+  context '#next_month' do
+    
+  end
+
+
 end # describe
 
 
