@@ -64,7 +64,7 @@ class Intervallum
 			return "#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month-1)}-#{last_day_of_previous_month}"
 		# if 1st day of the year, return December 31st of last year
 		elsif @@now.day - 1 <= 0 && @@now.month == 1
-			return "#{@@now.year-1}-31-01"
+			return "#{@@now.year-1}-12-31"
 		# just return the day before otherwise
 		else
 			return "#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month)}-#{Helpers.adjust_single_digits(@@now.day-1)}"
@@ -76,7 +76,7 @@ class Intervallum
 	end
 
 	def self.first_of_the_month
-		"#{@@now.year}-#{Helpers.adjust_single_digits(@now.month)}-01"
+		"#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month)}-01"
 	end
 
 	def self.this_month
