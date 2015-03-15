@@ -42,7 +42,7 @@ class Intervallum
 		days_in_month = Helpers.number_of_days_in_month(Helpers.months_in_words(@@now.month), @@now.year)
 		# if last day of the month, return the first of the next month
 		if @@now.day + 1 > days_in_month
-			return "#{@@now.year}-#{@@now.month+1}-01"
+			return "#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month+1)}-01"
 		# if December 31st, head over to next year
 		elsif @@now.month == 12 && @@now.day + 1 > days_in_month
 			return "#{@@now.year+1}-01-01"
