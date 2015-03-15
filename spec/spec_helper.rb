@@ -1,11 +1,7 @@
-begin
-  require 'bundler/setup'
-rescue LoadError
-  puts 'Using Bundler is preferred'
-end
-
 require 'rspec'
+require 'time'
 require_relative '../lib/intervallum'
+require_relative '../lib/helpers'
 
 RSpec.configure do |config|
   config.color = true
