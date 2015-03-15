@@ -54,4 +54,43 @@ describe 'testing methods...' do
     end
   end
 
+  context '#tomorrow' do
+    it 'returns the next day in Gregorian format' do
+      expect("#{@time.year}-#{Helpers.adjust_single_digits(@time.month)}-#{@time.day+1}").to eq('2015-03-15')
+    end
+
+    it 'returns the first day of the next month if today is the last day of the month' do
+      time = Time.parse('2015-03-31')
+      expect("#{time.year}-#{Helpers.adjust_single_digits(time.month+1)}-01").to eq('2015-04-01')
+    end
+
+    it 'returns the first day of the next year if today is December 31st' do
+      time = Time.parse('2015-12-31')
+      expect("#{time.year+1}-01-01").to eq('2016-01-01')
+    end
+  end
+
 end # describe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
