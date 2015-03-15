@@ -111,7 +111,14 @@ describe 'testing methods...' do
   end
 
   context '#next_month' do
-    
+    it 'retruns the first of the month, of the following month' do
+      expect("#{@time.year}-#{Helpers.adjust_single_digits(@time.month+1)}-01").to eq('2015-04-01')
+    end
+
+    it 'returns the first day of the year, next year, if month is in December' do
+      time = Time.parse('2015-12-4')
+      expect("#{time.year+1}-01-01").to eq('2016-01-01')
+    end
   end
 
 
