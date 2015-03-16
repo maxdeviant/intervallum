@@ -17,8 +17,8 @@ List of methods and examples as if today was March 2 2015
 - last_year                    # "2014"        , alias: previous_year
 - this_year                    # "2015"
 - next_year                    # "2016"
-in_months(4)                 # "2015-07-01"    , note: if argument is letter (e.g. 'J'), argument turns to 0
-in_months(-2)                # "2015-01-01"    , note: if argument is letter (e.g. 'J'), argument turns to 0
+- in_months(4)                 # "2015-07-01"    , note: if argument is letter (e.g. 'J'), argument turns to 0
+- in_months(-2)                # "2015-01-01"    , note: if argument is letter (e.g. 'J'), argument turns to 0
 
 =end
 
