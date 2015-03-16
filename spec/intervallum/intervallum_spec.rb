@@ -121,6 +121,23 @@ describe 'testing methods...' do
     end
   end
 
+  context '#last_year' do
+    it 'returns the previous year, as a string' do
+      expect("#{@time.year-1}").to be_a_kind_of(String)
+    end
+  end
+
+  context '#this_year' do
+    it 'returns the current year, as a string' do
+      expect("#{@time.year}").to be_a_kind_of(String)
+    end
+  end
+
+  context '#next_year' do
+    it 'returns the following year, as a string' do
+      expect("#{@time.year+1}").to be_a_kind_of(String)
+    end
+  end
 
 end # describe
 

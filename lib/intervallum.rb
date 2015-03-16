@@ -10,11 +10,11 @@ List of methods and examples as if today was March 2 2015
 - this_month                   # "3"
 - first_of_the_month           # "2015-03-01"
 - last_month                   # "2015-02-01", alias: previous_month
-next_month                   # "2015-04-01"
+- next_month                   # "2015-04-01"
 - wordy_month(3)             # "March"     , note:  argument can be string or integer
-last_year                    # "2014"      , alias: previous_year
-this_year                    # "2015"
-next_year                    # "2016"
+- last_year                    # "2014"      , alias: previous_year
+- this_year                    # "2015"
+- next_year                    # "2016"
 in_months(4)                 # "2015-07-01"
 in_months(-2)                # "2015-01-01"
 
