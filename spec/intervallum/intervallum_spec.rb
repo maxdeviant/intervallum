@@ -121,35 +121,22 @@ describe 'testing methods...' do
     end
   end
 
-  context '#last_year' do
-    it 'returns the previous year, as a string' do
-      expect("#{@time.year-1}").to be_a_kind_of(String)
-    end
-  end
-
-  context '#this_year' do
-    it 'returns the current year, as a string' do
-      expect("#{@time.year}").to be_a_kind_of(String)
-    end
-  end
-
-  context '#next_year' do
-    it 'returns the following year, as a string' do
-      expect("#{@time.year+1}").to be_a_kind_of(String)
-    end
-  end
-
-  context '#in_months()' do
-    xit 'returns the first of the month, in N months, where N > 0' do
-      
+  context '#in_months(N)' do
+    it 'returns first of month, in N months, where is + or -, staying in the same year' do
+      # number = 6
+      number = -1
+      # expect("#{@time.year}-#{Helpers.adjust_single_digits(@time.month + number)%12}-01").to eq('2015-09-01')
+      expect("#{@time.year}-#{Helpers.adjust_single_digits(@time.month + number)%12}-01").to eq('2015-02-01')
     end
 
-    xit 'returns the first of the month, in N months, where N < 0' do
-      
-    end
+    it 'returns the first of the month, of respective month, crossing years' do
+      # number = 14
+      number = -5
 
-    xit 'returns a correct output, even if argument is a String' do
-      
+      # up
+      # expect("#{@time.year+1}-#{Helpers.adjust_single_digits((@time.month+number)%12)}-01").to eq('2016-05-01')
+      # down
+      expect("#{@time.year-1}-#{Helpers.adjust_single_digits((@time.month+number)%12)}-01").to eq("2014-10-01")
     end
   end
 
