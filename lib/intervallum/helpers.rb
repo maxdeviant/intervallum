@@ -23,7 +23,6 @@ class Helpers
 
 	# gives the number of days in each month
 	def self.number_of_days_in_month(month_name, year)
-		raise 'An invalid argument was given in #number_of_days_in_month' if !months.keys.include?(month_name)
 		months = {
 			'January' => 31,
 			'February' => 28,
@@ -38,6 +37,7 @@ class Helpers
 			'November' => 30,
 			'December' => 31
 		}
+		raise 'An invalid argument was given in #number_of_days_in_month' if !months.keys.include?(month_name)
 		leap_year(year) && month_name == 'February' ? 29 : months[month_name]
 	end
 
