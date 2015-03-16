@@ -1,7 +1,7 @@
 require 'rspec'
 require 'time'
 require_relative '../lib/intervallum'
-require_relative '../lib/helpers'
+require_relative '../lib/intervallum/helpers'
 
 RSpec.configure do |config|
   config.color = true

@@ -1,3 +1,5 @@
+require 'intervallum/helpers'
+
 =begin
 
 List of methods and examples as if today was March 2 2015
@@ -5,22 +7,20 @@ List of methods and examples as if today was March 2 2015
 - today                        # "2015-03-02"
 - this_day                     # "02"
 - wordy_day                    # "March 2, 2015"
-- tomorrow                     # "2015-03-03", alias: next_day
-- yesterday                    # "2015-03-01", alias: previous_day
+- tomorrow                     # "2015-03-03"  , alias: next_day
+- yesterday                    # "2015-03-01"  , alias: previous_day
 - this_month                   # "3"
 - first_of_the_month           # "2015-03-01"
-- last_month                   # "2015-02-01", alias: previous_month
+- last_month                   # "2015-02-01"  , alias: previous_month
 - next_month                   # "2015-04-01"
-- wordy_month(3)             # "March"     , note:  argument can be string or integer
-- last_year                    # "2014"      , alias: previous_year
+- wordy_month(3)             # "March"         , note:  argument can be string or integer
+- last_year                    # "2014"        , alias: previous_year
 - this_year                    # "2015"
 - next_year                    # "2016"
-in_months(4)                 # "2015-07-01"
-in_months(-2)                # "2015-01-01"
+in_months(4)                 # "2015-07-01"    , note: if argument is letter (e.g. 'J'), argument turns to 0
+in_months(-2)                # "2015-01-01"    , note: if argument is letter (e.g. 'J'), argument turns to 0
 
 =end
-
-require_relative '../lib/helpers'
 
 class Intervallum
 	attr_reader :now
@@ -117,8 +117,13 @@ class Intervallum
 
 	# returns the first day of the month, after a +/- month is specified
 	def self.in_months(number)
+		number = number.to_i
+
+		# if number is 0, return current month
+		if number == 0
+			Intervallum.first_of_the_month
 		# go into next year
-		if @@now.month + number > 12
+		elsif @@now.month + number > 12
 			"#{@@now.year+1}-#{Helpers.adjust_single_digits((@@now.month+number)%12)}-01"
 		# go into last year
 		elsif @@now.month + number < 1 && (@@now.month+number) % 12 != 0

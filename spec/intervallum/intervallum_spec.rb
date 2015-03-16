@@ -139,6 +139,20 @@ describe 'testing methods...' do
     end
   end
 
+  context '#in_months()' do
+    xit 'returns the first of the month, in N months, where N > 0' do
+      
+    end
+
+    xit 'returns the first of the month, in N months, where N < 0' do
+      
+    end
+
+    xit 'returns a correct output, even if argument is a String' do
+      
+    end
+  end
+
 end # describe
 
 
