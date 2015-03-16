@@ -9,9 +9,7 @@ In my work, I've needed to access different timeframes and wanted a more concise
 
 #### Usage
 
-Everything is returned as a String.
-
-In the future, I do want to make this return either a `Time` Ruby object or an epoch time in the future, based on a config file.
+Everything is returned as a String. I do want to make this return either a `Time` Ruby object or an epoch time in the future.
 
 `gem install intervallum`<br>
 `bundle`
@@ -21,7 +19,9 @@ Everything is namespaced under `Intervallum`. For instance:
 Intervallum.[method_name]
 ```
 
-And for now, that's it :smiley:
+And for now, that's it.
+
+I'm not sure about older Rails projects but does work with Rails4.
 
 <strong>Make sure you have at least version 1.0.1</strong>.<br>
 
