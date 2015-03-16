@@ -1,29 +1,114 @@
 # intervallum
+<img src="http://img2.wikia.nocookie.net/__cb20090404230237/finalfantasy/images/b/b6/FFT_Time_mage.jpg" />
 
-###Available Methods
+This is primarily a manipulation of Ruby's `Time.now`.
 
+#### Back Story
+
+In my work, I've needed to access different timeframes and wanted a more concise way to go about it. I ended up making a class that pretty much did what all of this gem does. So, I decided to put it on the internet.
+
+#### Usage
+
+Everything is returned as a String.
+
+In the future, I do want to make this return either a `Time` Ruby object or an epoch time in the future, based on a config file.
+
+`gem install intervallum`<br>
+`bundle`
+
+Everything is namespaced under `Intervallum`. For instance:
+```ruby
+Intervallum.[method_name]
+```
+
+And for now, that's it :smiley:
+
+<strong>Make sure you have at least version 1.0.1</strong>.<br>
+
+1.0.0 was pushed to RubyGems with 2 bugs (one in `#tomorrow` and one in `#yesterday` that will break your code).
+
+#### Availbable methods
+
+If today was March 2, 2015...
 <table>
   <tr>
-    <td></td>
-    <td></td>
+    <td><strong>Method</strong></td>
+    <td><strong>Result</strong></td>
+    <td><strong>Comment</strong></td>
+  </tr>
+  <tr>
+    <td>today</td>
+    <td>"2015-03-02"</td>
     <td></td>
   </tr>
+  <tr>
+    <td>this_day</td>
+    <td>"15"</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>wordy_day</td>
+    <td>"March 2, 2015"</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>tomorrow</td>
+    <td>"2015-03-03"</td>
+    <td>alias: next_day</td>
+  </tr>
+  <tr>
+    <td>yesterday</td>
+    <td>"2015-03-01"</td>
+    <td>alias: previous_day</td>
+  </tr>
+  <tr>
+    <td>this_month</td>
+    <td>"3"</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>first_of_the_month</td>
+    <td>"2015-03-01"</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>last_month</td>
+    <td>"2015-02-01"</td>
+    <td>alias: previous_month</td>
+  </tr>
+  <tr>
+    <td>next_month</td>
+    <td>"2015-04-01"</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>wordy_month(3)</td>
+    <td>"March"</td>
+    <td>note: argument can be string or integer</td>
+  </tr>
+  <tr>
+    <td>last_year</td>
+    <td>"2014"</td>
+    <td>alias: previous_year</td>
+  </tr>
+  <tr>
+    <td>this_year</td>
+    <td>"2015"</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>next_year</td>
+    <td>"2016"</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>in_months(4)</td>
+    <td>"2015-07-01"</td>
+    <td>note: if letter is entered, current month is returned</td>
+  </tr>
+  <tr>
+    <td>in_months(-2)</td>
+    <td>"2015-01-01"</td>
+    <td>note: if letter is entered, current month is returned</td>
+  </tr>
 </table>
-
-- today                        # "2015-03-02"
-- this_day                     # "02"
-- wordy_day                    # "March 2, 2015"
-- tomorrow                     # "2015-03-03"    , alias: next_day
-- yesterday                    # "2015-03-01"    , alias: previous_day
-- this_month                   # "3"
-- first_of_the_month           # "2015-03-01"
-- last_month                   # "2015-02-01"    , alias: previous_month
-- next_month                   # "2015-04-01"
-- wordy_month(3)               # "March"         , note:  argument can be string or integer
-- last_year                    # "2014"          , alias: previous_year
-- this_year                    # "2015"
-- next_year                    # "2016"
-- in_months(4)                 # "2015-07-01"    , note: if argument is letter (e.g. 'J'), argument turns to 0
-- in_months(-2)                # "2015-01-01"    , note: if argument is letter (e.g. 'J'), argument turns to 0
-
-All of these are namespaced with Intervallum. For instance: `#tomorrow` would be `Intervallum.tomorrow`
