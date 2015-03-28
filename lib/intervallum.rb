@@ -7,18 +7,19 @@ List of methods and examples as if today was March 2 2015
 - today                        # "2015-03-02"
 - this_day                     # "02"
 - wordy_day                    # "March 2, 2015"
-- tomorrow                     # "2015-03-03"  , alias: next_day
-- yesterday                    # "2015-03-01"  , alias: previous_day
+- tomorrow                     # "2015-03-03"    , alias: next_day
+- yesterday                    # "2015-03-01"    , alias: previous_day
 - this_month                   # "3"
 - first_of_the_month           # "2015-03-01"
-- last_month                   # "2015-02-01"  , alias: previous_month
+- last_month                   # "2015-02-01"    , alias: previous_month
 - next_month                   # "2015-04-01"
-- wordy_month(3)             # "March"         , note:  argument can be string or integer
-- last_year                    # "2014"        , alias: previous_year
+- wordy_month(3)               # "March"         , note:  argument can be string or integer
+- last_year                    # "2014"          , alias: previous_year
 - this_year                    # "2015"
 - next_year                    # "2016"
 - in_months(4)                 # "2015-07-01"    , note: if argument is letter (e.g. 'J'), argument turns to 0
 - in_months(-2)                # "2015-01-01"    , note: if argument is letter (e.g. 'J'), argument turns to 0
+  wordy_gregorian_month(arg)   # "March"         , note: arg is optional. arg format if provided is 'yyyy-mm-dd'
 
 =end
 
@@ -99,6 +100,19 @@ class Intervallum
 			@@now.month >= 12 ? "#{@@now.year+1}-01-01" : "#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month+1)}-01"
 		end # next_month
 
+    # input is gregorian month: 'yyyy-mm-dd'
+    # if no input... returns wordy month of current month
+    # throws error otherwise
+    def wordy_gregorian_month(month=nil)
+    	if month && Helpers.gregorian_format?(month)
+        Intervallum.wordy_month(month[5..6])
+      elsif month == nil
+        Intervallum.wordy_month(Intervallum.this_month)
+      elsif !Helpers.gregorian_format?(month)
+      	raise 'Invalid argument passed into #wordy_gregorian_month. Must be yyyy-mm-dd'
+      end
+    end # wordy_gregorian_month
+
 		def last_year
 			"#{@@now.year-1}"
 		end # last_year
@@ -118,7 +132,6 @@ class Intervallum
 		# returns the first day of the month, after a +/- month is specified
 		def in_months(number)
 			number = number.to_i
-
 			# if number is 0, return current month
 			if number == 0
 				Intervallum.first_of_the_month
@@ -137,7 +150,7 @@ class Intervallum
 			# we stayed in the same year
 			else
 				"#{@@now.year}-#{Helpers.adjust_single_digits(@@now.month+number)}-01"
-			end # in_months
-		end # self
-	end
+			end
+		end # in_months
+	end # self
 end

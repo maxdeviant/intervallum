@@ -3,7 +3,7 @@ class Helpers
 
 	# takes a number and returns its month
 	def self.months_in_words(month_number)
-		raise 'An invalid argument was given in #months_in_words' if month_number > 12 || month_number < 1
+		raise 'An invalid argument was passed' if month_number > 12 || month_number < 1
 		months = {
 			1 => 'January',
 			2 => 'February',
@@ -37,7 +37,7 @@ class Helpers
 			'November' => 30,
 			'December' => 31
 		}
-		raise 'An invalid argument was given in #number_of_days_in_month' if !months.keys.include?(month_name)
+		raise 'An invalid argument was passed' if !months.keys.include?(month_name)
 		leap_year(year) && month_name == 'February' ? 29 : months[month_name]
 	end
 
@@ -56,8 +56,38 @@ class Helpers
 
 	# takes a single digit numbers puts a 0 in front
 	def self.adjust_single_digits(number)
-		raise 'An invalid argument was given in #adjust_single_digits' if !number.is_a? Integer
+		raise 'An invalid argument was passed' if !number.is_a? Integer
 		number < 10 ? "0#{number}" : "#{number}"
 	end
+
+	# if input is not equal to the gregorian format
+	# if the input is a letter turned to an integer, it'll be zero
+  # otherwise... return true
+  def self.gregorian_format?(input)
+    if input[5..6].to_i < 1 || input[5..6].to_i > 13
+      false
+    elsif input.length != 10
+      false
+    else
+      true
+    end
+  end
 	
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
