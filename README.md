@@ -111,4 +111,9 @@ If today was March 2, 2015...
     <td>"2015-01-01"</td>
     <td>note: if letter is entered, current month is returned</td>
   </tr>
+  <tr>
+    <td>wordy_gregorian_month</td>
+    <td>"March"</td>
+    <td>note: arg is optional. arg format if provided is 'yyyy-mm-dd'</td>
+  </tr>
 </table>
