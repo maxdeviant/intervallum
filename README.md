@@ -1,4 +1,4 @@
-# [intervallum](https://rubygems.org/gems/intervallum) [![Gem Version](https://badge.fury.io/rb/intervallum.svg)](http://badge.fury.io/rb/intervallum)
+# [intervallum](https://rubygems.org/gems/intervallum) [![Gem Version](https://badge.fury.io/rb/intervallum.svg)](http://badge.fury.io/rb/intervallum) [![Build Status](https://travis-ci.org/johnakers/intervallum.svg?branch=master)](https://travis-ci.org/johnakers/intervallum)
 <img src="http://img2.wikia.nocookie.net/__cb20090404230237/finalfantasy/images/b/b6/FFT_Time_mage.jpg" />
 
 This is primarily a manipulation of Ruby's `Time.now`.
