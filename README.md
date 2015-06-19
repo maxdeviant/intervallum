@@ -3,6 +3,8 @@
 
 This is primarily a manipulation of Ruby's `Time.now`.
 
+# NOTE: re-write of Intervallum underway. Old methods will be supported. Time Objects vs Strings & Julian dates vs Gregorian will be supported. As its a WIP, at this point in time, I'm not sure if Intervallum v2 will break v1.
+
 #### Back Story
 
 In my work, I've needed to access different timeframes and wanted a more concise way to go about it. I ended up making a class that pretty much did what all of this gem does. So, I decided to put it on the internet.
