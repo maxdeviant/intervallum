@@ -1,4 +1,8 @@
 module Spell
+  def self.leading_zero(number)
+    number < 10 ? "0#{number}" : "#{number}"
+  end
+
   def self.to_date(input)
     if input.is_a?(String)
       Date.parse(input)
@@ -44,6 +48,20 @@ module Spell
       input.to_i
     else
       input
+    end
+  end
+
+  # returns an Integer in an iso801 format, sans hypens
+  # e.g. 20150504 for May 4, 2015
+  def self.to_iso8601_mod(input)
+    if input.is_a?(String)
+      input.gsub('-','').to_i
+    elsif input.is_a?(Date)
+      self.to_iso8601_mod(self.to_string(input))
+    elsif input.is_a?(Time)
+      self.to_iso8601_mod(self.to_string(input))
+    elsif input.is_a?(Integer)
+      self.to_iso8601_mod(self.to_string(input))
     end
   end
 

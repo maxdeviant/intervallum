@@ -18,7 +18,7 @@ class Intervallum
 
     def today(option=nil)
       option.downcase! if option
-      if    option == 'd' || option == 'date'
+      if option == 'd' || option == 'date'
         Spell.to_date(@@string)
       elsif option == 'j' || option == 'julian'
         Spell.to_julian(@@string)
@@ -32,75 +32,187 @@ class Intervallum
     end
 
     def this_day(as_integer=false)
-      as_integer ? @@string[5..6].to_i : @@string[5..6]
+      as_integer ? @@string[-2..-1].to_i : @@string[-2..-1]
     end
 
     def wordy_day
-      self.scribed
+      self.scribed_day
     end
 
-    def scribed
+    def scribed_day
       "#{Scroll.get_month_name(@@month.to_i)} #{@@day.to_i}, #{@@year}"
     end
 
-    def previous_day
-      self.yesterday
+    def previous_day(option=nil)
+      self.yesterday(option)
     end
 
-    def yesterday
+    def yesterday(option=nil)
       if Scroll.first_of_the_year?(@@month, @@day)
-        "#{@@year-1}-12-01"
+        string = "#{@@year-1}-12-01"
       elsif Scroll.first_of_the_month?(@@month, @@day)
         previous_month = @@month.to_i-1
-        "#{@@year}-#{previous_month}-#{Scroll.last_day_of_month(previous_month)}"
+        string = "#{@@year}-#{previous_month}-#{Scroll.last_day_of_month(previous_month)}"
       else
-        "#{@@year}-#{@@month}-#{Scroll.leading_zero(@@day.to_i-1)}"
+        string = "#{@@year}-#{@@month}-#{Spell.leading_zero(@@day.to_i-1)}"
+      end
+      option.downcase! if option
+      if option == 'd' || option == 'date'
+        Spell.to_date(string)
+      elsif option == 'j' || option == 'julian'
+        Spell.to_julian(string)
+      elsif option == 't' || option == 'time'
+        Spell.to_time(string)
+      elsif option == 'e' || option == 'epoch'
+        Spell.to_epoch(string)
+      else
+        Spell.to_string(string)
       end
     end
 
-    def next_day
-      self.tommorow
+    def next_day(option=nil)
+      self.tomorrow(option)
     end
 
-    def tomorrow
-      if Scroll.last_of_the_year?(@@month, @@day)
-        "#{@@year+1}-01-01"
-      elsif Scroll.last_of_the_month?(@@month, @@day)
-        "#{@@year}-#{Scroll.leading_zero(@@month.to_i+1)}-01"
+    def tomorrow(option=nil)
+      if Scroll.last_day_of_the_year?(@@month, @@day)
+        answer = "#{@@year+1}-01-01"
+      elsif Scroll.last_day_of_month?(@@month.to_i, @@day)
+        answer = "#{@@year}-#{Spell.leading_zero(@@month.to_i+1)}-01"
       else
-        "#{@@year}-#{@@month}-#{Scroll.leading_zero(@@day.to_i+1)}"
+        answer = "#{@@year}-#{@@month}-#{Spell.leading_zero(@@day.to_i+1)}"
+      end
+
+      option.downcase! if option
+      if option == 'd' || option == 'date'
+        Spell.to_date(answer)
+      elsif option == 'j' || option == 'julian'
+        Spell.to_julian(answer)
+      elsif option == 't' || option == 'time'
+        Spell.to_time(answer)
+      elsif option == 'e' || option == 'epoch'
+        Spell.to_epoch(answer)
+      else
+        Spell.to_string(answer)
       end
     end
 
-    def first_of_the_month
-      "#{@@year}-#{@@yesterday}-01"
+    def first_of_the_month(option=nil)
+      string = "#{@@year}-#{@@month}-01"
+      option.downcase! if option
+      if option == 'd' || option == 'date'
+        Spell.to_date(string)
+      elsif option == 'j' || option == 'julian'
+        Spell.to_julian(string)
+      elsif option == 't' || option == 'time'
+        Spell.to_time(string)
+      elsif option == 'e' || option == 'epoch'
+        Spell.to_epoch(string)
+      else
+        Spell.to_string(string)
+      end
     end
 
-    def previous_month
-      self.last_month
+    def previous_month(option=nil)
+      self.last_month(option)
     end
 
-    def last_month
+    def last_month(option=nil)
       month = @@month.to_i-1
-      "#{@@year}-#{Scroll.leading_zero(month)}-#{@@day}"
+      string = "#{@@year}-#{Spell.leading_zero(month)}-#{@@day}"
+      option.downcase! if option
+      if option == 'd' || option == 'date'
+        Spell.to_date(string)
+      elsif option == 'j' || option == 'julian'
+        Spell.to_julian(string)
+      elsif option == 't' || option == 'time'
+        Spell.to_time(string)
+      elsif option == 'e' || option == 'epoch'
+        Spell.to_epoch(string)
+      else
+        Spell.to_string(string)
+      end
     end
 
-    # WIP
     def this_month
       @@month
     end
 
-    # WIP
-    def next_month
-      
+    def next_month(option=nil)
+      if Scroll.last_month_of_year(@@month.to_i)
+        string = "#{@@year+1}-01-01"
+      else
+        string = "#{@@year}-#{Spell.leading_zero(@@month.to_i+1)}-01"
+      end
+      option.downcase! if option
+      if option == 'd' || option == 'date'
+        Spell.to_date(string)
+      elsif option == 'j' || option == 'julian'
+        Spell.to_julian(string)
+      elsif option == 't' || option == 'time'
+        Spell.to_time(string)
+      elsif option == 'e' || option == 'epoch'
+        Spell.to_epoch(string)
+      else
+        Spell.to_string(string)
+      end
+    end
+
+    def previous_year
+      self.last_year
+    end
+
+    def last_year
+      (@@year-1).to_s
+    end
+
+    def following_year
+      self.next_year
+    end
+
+    def next_year
+      (@@year+1).to_s
+    end
+
+    def current_year
+      self.this_year
+    end
+
+    def this_year
+      @@year.to_s
+    end
+
+    def in_months(number_of_months)
+    end
+
+    def wordy_month(month_number=nil)
+      self.month_name(month_number)
+    end
+
+    def month_name(month_number=nil)
+      if month_number 
+        Scroll.get_month_name(month_number.to_i)
+      else
+        Scroll.get_month_name(@@month.to_i)
+      end
     end
 
     # variables
     @@now    = Time.now
     @@year   = @@now.year
-    @@month  = Scroll.leading_zero(@@now.month)
-    @@day    = Scroll.leading_zero(@@now.day)
+    @@month  = Spell.leading_zero(@@now.month)
+    @@day    = Spell.leading_zero(@@now.day)
     @@string = "#{@@year}-#{@@month}-#{@@day}"
 
   end # self
 end # class
+
+
+
+
+
+
+
+
+
+

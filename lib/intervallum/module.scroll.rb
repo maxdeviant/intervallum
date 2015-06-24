@@ -36,7 +36,7 @@ module Scroll
     months[name]
   end
 
-  def self.last_day_of_month(month_number)
+  def self.last_day_of_month?(month_number, day)
     months = {
       1 => 31,
       2 => 28,
@@ -51,7 +51,7 @@ module Scroll
       11 => 30,
       12 => 31
     }
-    months[month_number]
+    day.to_i == months[month_number]
   end
 
   def self.first_of_the_year?(month, day)
@@ -62,17 +62,19 @@ module Scroll
     day.to_i == 1
   end
 
-  def self.last_of_the_year?(month, day)
-    month == 12 && day == 1
+  def self.last_day_of_the_year?(month, day)
+    day = day.to_i
+    month == 12 && day == 31
+  end
+
+  def self.last_month_of_year?(month)
+    month == 12
   end
 
   def self.last_of_the_month?(month, day)
     self.last_day_of_month[month.to_i] == day
   end
 
-  def self.leading_zero(number)
-    number < 10 ? "0#{number}" : "#{number}"
-  end
 end
 
 
