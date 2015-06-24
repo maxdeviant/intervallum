@@ -3,7 +3,7 @@
 
 This is primarily a manipulation of Ruby's `Time.now`.
 
-# NOTE: re-write of Intervallum underway. Old methods will be supported. Time Objects vs Strings & Julian dates vs Gregorian will be supported. As its a WIP, at this point in time, I'm not sure if Intervallum v2 will break v1.
+_NOTE: add on of Intervallum underway. Old methods will be supported. Time Objects vs Date Objects vs String Objects & Julian dates vs Gregorian will be supported_
 
 #### Back Story
 
