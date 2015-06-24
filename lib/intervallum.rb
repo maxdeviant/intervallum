@@ -246,13 +246,3 @@ class Intervallum
 
   end # self
 end # class
-
-
-
-
-
-
-
-
-
-

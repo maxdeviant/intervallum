@@ -79,22 +79,3 @@ module Scroll
     month == 1
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
