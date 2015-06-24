@@ -1,8 +1,11 @@
 source "https://rubygems.org"
 
-group :development, :test do
-  gem 'rake'
-  gem 'rspec'
-end
+# ruby version
+ruby '2.2.1'
 
+# gems
+gem 'rake'
+gem 'awesome_print'
+
+# this
 gemspec
