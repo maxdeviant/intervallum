@@ -75,6 +75,9 @@ module Scroll
     self.last_day_of_month[month.to_i] == day
   end
 
+  def self.first_month_of_the_year?(month)
+    month == 1
+  end
 end
 
 

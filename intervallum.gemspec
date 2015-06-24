@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name				= 'intervallum'
-  s.version			= '2.0.0'
+  s.version			= '1.2.0'
   s.summary     = 'A gem for timeframes'
   s.description	= "A manipulation of Ruby's Time.now"
   s.authors 		= 'John Akers'

@@ -1,9 +1,3 @@
-# “Time is the substance I am made of.
-# Time is a river which sweeps me along, but I am the river;
-# it is a tiger which destroys me, but I am the tiger; 
-# it is a fire which consumes me, but I am the fire.”
-# - Jorge Luis Borges
-
 # require all files
 Dir.glob(File.join('**', '*.rb')).each { |file| require "./#{file}" }
 
@@ -15,6 +9,14 @@ require 'awesome_print'
 # main class
 class Intervallum
   class << self
+
+    def borges
+      ap "Time is the substance I am made of."
+      ap "Time is a river which sweeps me along, but I am the river;"
+      ap "it is a tiger which destroys me, but I am the tiger;"
+      ap "it is a fire which consumes me, but I am the fire."
+      ap "- Jorge Luis Borges"
+    end
 
     def today(option=nil)
       option.downcase! if option
@@ -31,8 +33,13 @@ class Intervallum
       end
     end
 
-    def this_day(as_integer=false)
-      as_integer ? @@string[-2..-1].to_i : @@string[-2..-1]
+    def this_day(as_integer=nil)
+      as_integer.downcase! if as_integer
+      if as_integer == 'i' || as_integer == 'integer' || as_integer == 'int'
+        @@string[-2..-1].to_i
+      else
+        @@string[-2..-1]
+      end
     end
 
     def wordy_day
@@ -56,6 +63,7 @@ class Intervallum
       else
         string = "#{@@year}-#{@@month}-#{Spell.leading_zero(@@day.to_i-1)}"
       end
+
       option.downcase! if option
       if option == 'd' || option == 'date'
         Spell.to_date(string)
@@ -119,7 +127,12 @@ class Intervallum
 
     def last_month(option=nil)
       month = @@month.to_i-1
-      string = "#{@@year}-#{Spell.leading_zero(month)}-#{@@day}"
+      if Scroll.first_month_of_the_year?(month)
+        string = "#{@@year-1}-12-01"
+      else
+        string = "#{@@year}-#{Spell.leading_zero(month)}-01"
+      end
+
       option.downcase! if option
       if option == 'd' || option == 'date'
         Spell.to_date(string)
@@ -134,16 +147,26 @@ class Intervallum
       end
     end
 
-    def this_month
-      @@month
+    def current_month(as_integer=nil)
+      self.this_month(as_integer)
+    end
+
+    def this_month(as_integer=nil)
+      as_integer.downcase! if as_integer
+      if as_integer == 'i' || as_integer == 'integer' || as_integer == 'int'
+        @@month.to_i
+      else
+        @@month
+      end
     end
 
     def next_month(option=nil)
-      if Scroll.last_month_of_year(@@month.to_i)
+      if Scroll.last_month_of_year?(@@month.to_i)
         string = "#{@@year+1}-01-01"
       else
         string = "#{@@year}-#{Spell.leading_zero(@@month.to_i+1)}-01"
       end
+
       option.downcase! if option
       if option == 'd' || option == 'date'
         Spell.to_date(string)
@@ -182,7 +205,24 @@ class Intervallum
       @@year.to_s
     end
 
-    def in_months(number_of_months)
+    # "safe" only +/- 12 months
+    def in_months(num=nil)
+      num = num.to_i
+      month = @@month.to_i
+
+      if num == 0
+        Intervallum.first_of_the_month
+      elsif (month + num) > 12
+        "#{@@year+1}-#{Spell.leading_zero((month+num)%12)}-01"
+      elsif (month + num) < 1 && (month+num) % 12 != 0
+        "#{@@year-1}-#{Spell.leading_zero((@@month.to_i+num)%12)}-01"
+      elsif (month + num) % 12 == 0 && num > 0
+        "#{@@year}-12-01"
+      elsif (@@month.to_i + num) % 12 == 0 && num < 0
+        "#{@@year-1}-12-01"
+      else
+        "#{@@year}-#{Spell.leading_zero(month + num)}-01"
+      end
     end
 
     def wordy_month(month_number=nil)

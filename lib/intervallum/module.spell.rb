@@ -65,6 +65,10 @@ module Spell
     end
   end
 
+  def self.to_iso8601(input)
+    self.to_string(input)
+  end
+
   def self.to_string(input)
     if input.is_a?(Time)
       input.to_s[0..9]
