@@ -7,4 +7,5 @@ Gem::Specification.new do |s|
   s.email = 'johnakersemail@gmail.com'
   s.homepage = 'https://github.com/johnakers/intervallum'
   s.files   = ["./lib/intervallum.rb"]
+  s.license = 'MIT'
 end
