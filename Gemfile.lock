@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    intervallum (1.2.6)
+    intervallum (1.2.7)
 
 GEM
   remote: https://rubygems.org/
