@@ -1,5 +1,8 @@
 # require all files
-Dir.glob(File.join('**', '*.rb')).each { |file| require "./#{file}" }
+# Dir.glob(File.join('**', '*.rb')).each { |file| require "./#{file}" }
+require './lib/intervallum/module.scroll.rb'
+require './lib/intervallum/module.spell.rb'
+
 
 # libraries / gems
 require 'time'
