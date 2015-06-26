@@ -1,4 +1,4 @@
-module Scroll
+class Scroll
   def self.get_month_name(number)
     months = {
       1 => 'January',

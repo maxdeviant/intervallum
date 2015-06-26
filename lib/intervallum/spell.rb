@@ -1,4 +1,4 @@
-module Spell
+class Spell
   def self.leading_zero(number)
     number < 10 ? "0#{number}" : "#{number}"
   end

@@ -1,5 +1,6 @@
 # require all intervallum files
-Dir['./lib/intervallum/*'].each { |file| require file }
+require './lib/intervallum/spell.rb'
+require './lib/intervallum/scroll.rb'
 
 # libraries / gems
 require 'time'
