@@ -1,4 +1,4 @@
-# [intervallum](https://rubygems.org/gems/intervallum) [![Gem Version](https://badge.fury.io/rb/intervallum.svg)](http://badge.fury.io/rb/intervallum) [![Build Status](https://travis-ci.org/johnakers/intervallum.svg?branch=master)](https://travis-ci.org/johnakers/intervallum)
+# Intervallum
 <img src="http://i.imgur.com/2VE0eTB.png" />
 
 This is primarily a manipulation of Ruby's `Time.now`.
