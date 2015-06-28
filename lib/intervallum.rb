@@ -1,22 +1,25 @@
-# require all intervallum files
-require './lib/intervallum/spell.rb'
-require './lib/intervallum/scroll.rb'
+require "intervallum/module.spell"
+require "intervallum/module.scroll"
 
 # libraries / gems
 require 'time'
 require 'date'
-require 'awesome_print'
 
 # main class
 class Intervallum
   class << self
 
+    # modules
+    include Spell
+    include Scroll
+
+    # methods
     def borges
-      ap "Time is the substance I am made of."
-      ap "Time is a river which sweeps me along, but I am the river;"
-      ap "it is a tiger which destroys me, but I am the tiger;"
-      ap "it is a fire which consumes me, but I am the fire."
-      ap "- Jorge Luis Borges"
+      puts "Time is the substance I am made of."
+      puts "Time is a river which sweeps me along, but I am the river;"
+      puts "it is a tiger which destroys me, but I am the tiger;"
+      puts "it is a fire which consumes me, but I am the fire."
+      puts "- Jorge Luis Borges"
     end
 
     def today(option=nil)
