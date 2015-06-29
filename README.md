@@ -1,4 +1,4 @@
-# <a href="https://rubygems.org/gems/intervallum">intervallum</a> [![Gem Version](https://badge.fury.io/rb/intervallum.svg)](http://badge.fury.io/rb/intervallum)
+# intervallum [![Gem Version](https://badge.fury.io/rb/intervallum.svg)](http://badge.fury.io/rb/intervallum)
 a manipulation of Ruby's `Time.now`
 
 
