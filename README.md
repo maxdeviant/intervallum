@@ -2,9 +2,9 @@
 a manipulation of Ruby's `Time.now`
 
 
-**<a href="installs">Install</a>**<br>
-**<a href="intervallum">Intervallum</a>**<br>
-**<a href="spell">Casting via Spells</a>**
+**<a href="#installs">Install</a>**<br>
+**<a href="#intervallum">Intervallum</a>**<br>
+**<a href="#spell">Casting via Spells</a>**
 
 
 ### <a name="installs">Install</a>
