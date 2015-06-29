@@ -132,14 +132,14 @@ julian = Spell.to_julian epoch # returns a Julian Date object
 # <Date: 2015-06-16 ((2457203j,0s,0n),+0s,Infj)>
 
 iso = Spell.to_iso8601 julian
-"2015-06-16"
+# "2015-06-16"
 
 iso_mod = Spell.to_iso8601_mod iso # returns an Integer in the iso8601 format, kind of...
-20150616
+# 20150616
 
 new_date = Date.parse('2015-05-12')
 Spell.to_string new_date
-"2015-05-12"
+# "2015-05-12"
 ```
 
 Notes:
